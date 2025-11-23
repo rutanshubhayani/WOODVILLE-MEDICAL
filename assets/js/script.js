@@ -431,6 +431,12 @@ function navigateToProductDetails(productId) {
         return;
     }
     
+    // Store the selected product data in localStorage
+    const product = productCatalog.find(item => item.id === productId);
+    if (product) {
+        localStorage.setItem('selectedProduct', JSON.stringify(product));
+    }
+    
     // Fix path resolution based on current location
     let url;
     if (window.location.pathname.includes('/assets/pages/')) {
@@ -668,23 +674,24 @@ function openProductModal(card) {
     const imageSrc = card.querySelector('img').src;
     const ratingHtml = card.querySelector('.rating').innerHTML;
 
-    // Get product details from catalog
-    const productData = productCatalog.find(p => p.id === id);
-    const description = productData ? productData.description : 'High-quality medical equipment for professional use.';
-
     // Store current product data
     currentModalProduct = {
-        id,
-        name,
-        price,
-        image: imageSrc
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: resolveAssetPath(product.image),
+        description: product.description,
+        rating: product.rating,
+        reviews: product.reviews
     };
 
     // Populate Modal
-    modalImage.src = imageSrc;
-    modalName.textContent = name;
-    modalPrice.textContent = `$${price.toFixed(2)}`;
-    modalRating.innerHTML = ratingHtml;
+    modalImage.src = currentModalProduct.image;
+    modalImage.alt = product.name;
+    modalName.textContent = product.name;
+    modalPrice.textContent = `$${product.price.toFixed(2)}`;
+    modalRating.innerHTML = generateStarRating(product.rating) + `<span class="rating-count">(${product.reviews || 0} reviews)</span>`;
+    modalDescription.textContent = product.description;
     modalQuantityInput.value = 1;
     
     // Set description if modal has description element
@@ -894,25 +901,56 @@ function initializeProductDetails() {
         return;
     }
 
-    const product = productCatalog.find(item => item.id === productId);
+    // Try to get product from localStorage first, then from catalog
+    let product = JSON.parse(localStorage.getItem('selectedProduct'));
+    if (!product || product.id !== productId) {
+        product = productCatalog.find(item => item.id === productId);
+    }
 
     if (!product) {
         console.error('Product not found');
         return;
     }
 
+    // Clear the selected product from localStorage after use
+    localStorage.removeItem('selectedProduct');
+
     let resolvedImage = resolveAssetPath(product.image);
     const productImageEl = document.getElementById('product-detail-image');
 
     // Populate product details
-    document.getElementById('product-page-title').textContent = product.name;
-    document.getElementById('product-breadcrumb').textContent = product.name;
+    const titleEl = document.getElementById('product-page-title');
+    if (titleEl) {
+        titleEl.textContent = product.name;
+    } else {
+        document.title = product.name + ' - Medical Equipment';
+    }
+    
+    const breadcrumbEl = document.getElementById('product-breadcrumb');
+    if (breadcrumbEl) {
+        breadcrumbEl.textContent = product.name;
+    }
     productImageEl.src = resolvedImage;
     productImageEl.alt = product.name;
     document.getElementById('product-detail-name').textContent = product.name;
     document.getElementById('product-detail-price').textContent = `$${product.price.toFixed(2)}`;
     document.getElementById('product-detail-description').textContent = product.description;
     document.getElementById('product-sku').textContent = product.sku;
+
+    // Update category
+    const categoryEl = document.getElementById('product-category');
+    if (categoryEl) {
+        categoryEl.textContent = product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1) : 'Medical Supplies';
+    }
+
+    // Update the description tab content
+    const descriptionTab = document.getElementById('description');
+    if (descriptionTab) {
+        descriptionTab.innerHTML = `
+            <h3>Product Description</h3>
+            <p>${product.description}</p>
+        `;
+    }
 
     // Update rating
     const ratingContainer = document.getElementById('product-detail-rating');
