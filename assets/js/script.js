@@ -247,16 +247,62 @@ window.initializeCart = function () {
     const cartIcon = document.querySelector('.cart-action');
 
     // Select Product Modal Elements
-    productModal = document.querySelector('.product-modal');
-    productModalOverlay = document.querySelector('.product-modal-overlay');
-    closeModalBtn = document.querySelector('.close-modal');
-    modalImage = document.querySelector('.modal-image img');
-    modalName = document.querySelector('.modal-product-name');
-    modalRating = document.querySelector('.modal-rating');
-    modalPrice = document.querySelector('.modal-new-price');
-    modalDescription = document.querySelector('.modal-description');
-    modalQuantityInput = document.querySelector('.modal-actions .quantity-input');
-    modalAddToCartBtn = document.querySelector('.btn-add-to-cart');
+    function initializeModalElements() {
+        productModal = document.querySelector('.product-modal');
+        productModalOverlay = document.querySelector('.product-modal-overlay');
+        closeModalBtn = document.querySelector('.close-modal');
+        modalImage = document.querySelector('.modal-image img');
+        modalName = document.querySelector('.modal-product-name');
+        modalRating = document.querySelector('.modal-rating');
+        modalPrice = document.querySelector('.modal-new-price');
+        modalDescription = document.querySelector('.modal-description');
+        modalQuantityInput = document.querySelector('.modal-actions .quantity-input');
+        modalAddToCartBtn = document.querySelector('.btn-add-to-cart');
+
+        // Product Modal Event Listeners
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeProductModal);
+        }
+
+        if (productModalOverlay) {
+            productModalOverlay.addEventListener('click', closeProductModal);
+        }
+
+        if (modalAddToCartBtn) {
+            modalAddToCartBtn.addEventListener('click', () => {
+                if (currentModalProduct) {
+                    const quantity = parseInt(modalQuantityInput.value) || 1;
+                    addToCartFromModal(currentModalProduct, quantity);
+                    closeProductModal();
+                }
+            });
+        }
+
+        // Modal Quantity Controls
+        const modalMinusBtn = document.querySelector('.modal-actions .minus-btn');
+        const modalPlusBtn = document.querySelector('.modal-actions .plus-btn');
+
+        if (modalMinusBtn) {
+            modalMinusBtn.addEventListener('click', () => {
+                let val = parseInt(modalQuantityInput.value) || 1;
+                if (val > 1) modalQuantityInput.value = val - 1;
+            });
+        }
+
+        if (modalPlusBtn) {
+            modalPlusBtn.addEventListener('click', () => {
+                let val = parseInt(modalQuantityInput.value) || 1;
+                modalQuantityInput.value = val + 1;
+            });
+        }
+    }
+
+    // Initialize modal elements, with delay if not loaded yet
+    if (document.querySelector('.product-modal')) {
+        initializeModalElements();
+    } else {
+        setTimeout(initializeModalElements, 500);
+    }
 
     // Select Checkout Elements
     checkoutOrderList = document.getElementById('checkout-order-list');
@@ -298,43 +344,6 @@ window.initializeCart = function () {
 
     if (cartOverlay) {
         cartOverlay.addEventListener('click', closeCartSidebar);
-    }
-
-    // Product Modal Event Listeners
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeProductModal);
-    }
-
-    if (productModalOverlay) {
-        productModalOverlay.addEventListener('click', closeProductModal);
-    }
-
-    if (modalAddToCartBtn) {
-        modalAddToCartBtn.addEventListener('click', () => {
-            if (currentModalProduct) {
-                const quantity = parseInt(modalQuantityInput.value) || 1;
-                addToCartFromModal(currentModalProduct, quantity);
-                closeProductModal();
-            }
-        });
-    }
-
-    // Modal Quantity Controls
-    const modalMinusBtn = document.querySelector('.modal-actions .minus-btn');
-    const modalPlusBtn = document.querySelector('.modal-actions .plus-btn');
-
-    if (modalMinusBtn) {
-        modalMinusBtn.addEventListener('click', () => {
-            let val = parseInt(modalQuantityInput.value) || 1;
-            if (val > 1) modalQuantityInput.value = val - 1;
-        });
-    }
-
-    if (modalPlusBtn) {
-        modalPlusBtn.addEventListener('click', () => {
-            let val = parseInt(modalQuantityInput.value) || 1;
-            modalQuantityInput.value = val + 1;
-        });
     }
 
     // Checkout Form Listener
@@ -665,14 +674,19 @@ function closeCartSidebar() {
 }
 
 function openProductModal(card) {
+    if (!productModal) {
+        initializeModalElements();
+    }
     if (!productModal || !productModalOverlay) return;
 
     // Extract Data
     const id = card.dataset.id;
-    const name = card.dataset.name;
-    const price = parseFloat(card.dataset.price);
-    const imageSrc = card.querySelector('img').src;
-    const ratingHtml = card.querySelector('.rating').innerHTML;
+    const product = productCatalog.find(item => item.id === id);
+
+    if (!product) {
+        console.error('Product not found for modal');
+        return;
+    }
 
     // Store current product data
     currentModalProduct = {
@@ -693,11 +707,6 @@ function openProductModal(card) {
     modalRating.innerHTML = generateStarRating(product.rating) + `<span class="rating-count">(${product.reviews || 0} reviews)</span>`;
     modalDescription.textContent = product.description;
     modalQuantityInput.value = 1;
-    
-    // Set description if modal has description element
-    if (modalDescription) {
-        modalDescription.textContent = description;
-    }
 
     // Show Modal
     productModal.classList.add('active');
