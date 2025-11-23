@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Medical Equipment</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+
+
+    <!-- Contact Connect -->
+    <section class="contact-connect-section">
+        <div class="container">
+            <div class="contact-connect-grid">
+                <div class="contact-details-panel" data-aos="fade-right">
+                    <h3>Talk to a human</h3>
+                    <p>Choose the channel that fits your workflow. Every message is routed to the right specialist.</p>
+
+                    <div class="contact-info-cards">
+                        <div class="info-card">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <strong>Flagship Lab</strong>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <strong>Sales & Support</strong>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <strong>General Inquiries</strong>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <strong>Business Hours</strong>
+                                <span>Mon-Fri 09:00-18:00 • Sat 10:00-16:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="availability-card">
+                        <div>
+                            <h3>Clinical escalation desk</h3>
+                            <p>On-call clinicians review adverse events or device questions.</p>
+                        </div>
+                        <span>24/7</span>
+                    </div>
+                </div>
+
+                <div class="contact-form-panel" data-aos="fade-left">
+                    <div class="contact-form-head">
+                        <h3>Send us a message</h3>
+                        <p>Share your project, supply need, or support ticket. We respond within one business hour.</p>
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="sales">Sales Question</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required
+                                placeholder="Tell us how we can help you..."></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                <span class="checkmark"></span>
+                                Keep me informed about regulatory updates and product drops
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" data-aos="zoom-in">
+        <div class="container">
+            <h2>Find Us</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9581890.724433789!2d-15.001635482260824!3d54.10337502661577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x25a3b1142c791a9%3A0xc4f8a0433288257a!2sUnited%20Kingdom!5e0!3m2!1sen!2sin!4v1763905984076!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0; border-radius: 15px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about our products and services.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <h4>Are your products FDA approved?</h4>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our medical equipment and supplies are FDA approved and meet the highest safety and
+                            quality standards.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h4>What is your return policy?</h4>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy for unused items in their original packaging. Medical
+                            consumables are non-returnable for safety reasons.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <h4>Do you offer bulk discounts?</h4>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer competitive bulk pricing for healthcare facilities, institutions, and large
+                            quantity orders. Contact our sales team for custom quotes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h4>How long does shipping take?</h4>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard shipping takes 3-5 business days. Express shipping (1-2 days) and same-day delivery
+                            are available in select areas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

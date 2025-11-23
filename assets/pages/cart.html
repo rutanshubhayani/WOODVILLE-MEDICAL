@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Equipment - Cart</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Cart Section -->
+    <section class="cart-page-section">
+        <div class="container">
+            <div class="cart-page-layout">
+                <div class="cart-table-card" data-aos="fade-right">
+                    <div class="cart-table-header">
+                        <span>Product</span>
+                        <span>Price</span>
+                        <span>Quantity</span>
+                        <span>Subtotal</span>
+                    </div>
+                    <div class="cart-page-items" id="cart-page-items">
+                        <div class="cart-page-empty">
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                            <p>Your cart is currently empty.</p>
+                            <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-summary-card" data-aos="fade-left">
+                    <h3>Cart Totals</h3>
+                    <div class="cart-summary-row">
+                        <span>Items</span>
+                        <span id="cart-page-count">0</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-page-subtotal">$0.00</span>
+                    </div>
+                    <div class="cart-summary-row total">
+                        <span>Total</span>
+                        <span id="cart-page-total">$0.00</span>
+                    </div>
+                    <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+                    <a href="shop.html" class="btn btn-secondary btn-block">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Cart Sidebar Placeholder -->
+    <div id="cart-sidebar-placeholder"></div>
+
+    <!-- Product Modal Placeholder -->
+    <div id="product-modal-placeholder"></div>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="../../assets/js/components.js"></script>
+    <script src="../../assets/js/script.js"></script>
+</body>
+
+</html>

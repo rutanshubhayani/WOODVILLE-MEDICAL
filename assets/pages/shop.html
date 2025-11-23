@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Medical Equipment</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+
+
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Sidebar Filters -->
+                <aside class="shop-sidebar" data-aos="fade-right">
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <ul class="category-list">
+                            <li><a href="#" data-category="all" class="active">All Products <span>(12)</span></a></li>
+                            <li><a href="#" data-category="masks">Face Masks <span>(4)</span></a></li>
+                            <li><a href="#" data-category="sanitizers">Sanitizers <span>(3)</span></a></li>
+                            <li><a href="#" data-category="equipment">Medical Equipment <span>(5)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Price Range</h3>
+                        <div class="price-filter">
+                            <input type="range" id="price-range" min="0" max="100" value="100">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span id="max-price">$100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Filter by Rating</h3>
+                        <ul class="rating-filter">
+                            <li>
+                                <label>
+                                    <input type="checkbox" value="5">
+                                    <span class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" value="4">
+                                    <span class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
+                                    <span>& Up</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" value="3">
+                                    <span class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
+                                    <span>& Up</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <button class="btn btn-secondary btn-reset-filters">Reset Filters</button>
+                    </div>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="shop-content" data-aos="fade-left">
+                    <div class="shop-toolbar">
+                        <div class="showing-results">
+                            Showing <span id="showing-count">12</span> of <span id="total-count">12</span> results
+                        </div>
+                        <div class="shop-sorting">
+                            <label for="sort-by">Sort by:</label>
+                            <select id="sort-by">
+                                <option value="default">Default</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name">Name: A to Z</option>
+                                <option value="rating">Rating: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-grid" id="shop-products-grid">
+                        <!-- Products will be injected here by JavaScript -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="page-link active">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        <a href="#" class="page-link"><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Cart Sidebar Placeholder -->
+    <div id="cart-sidebar-placeholder"></div>
+
+    <!-- Product Modal Placeholder -->
+    <div id="product-modal-placeholder"></div>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="../../assets/js/components.js"></script>
+    <script src="../../assets/js/script.js"></script>
+</body>
+
+</html>

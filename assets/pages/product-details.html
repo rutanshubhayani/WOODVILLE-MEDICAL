@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Medical Equipment</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+
+
+    <!-- Product Details Section -->
+    <section class="product-details-section">
+        <div class="container">
+            <div class="product-details-grid">
+                <!-- Product Image -->
+                <div class="product-image-section" data-aos="fade-right">
+                    <div class="product-main-image">
+                        <img id="product-detail-image" src="../../assets/images/product_mask.png" alt="Product">
+                    </div>
+                    <div class="product-thumbnails" id="product-thumbnails">
+                        <!-- Thumbnails will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-section" data-aos="fade-left">
+                    <h2 id="product-detail-name">Product Name</h2>
+                    <div class="product-rating" id="product-detail-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="rating-count">(120 reviews)</span>
+                    </div>
+                    <div class="product-price-section">
+                        <span class="product-detail-price" id="product-detail-price">$0.00</span>
+                        <span class="stock-status in-stock"><i class="fa-solid fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <div class="product-description">
+                        <p id="product-detail-description">
+                            High-quality medical equipment designed for professional and home use.
+                            Meets all safety standards and certifications.
+                        </p>
+                    </div>
+
+                    <!-- Product Features -->
+                    <div class="product-features">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> FDA Approved</li>
+                            <li><i class="fa-solid fa-check"></i> Premium Quality Materials</li>
+                            <li><i class="fa-solid fa-check"></i> Easy to Use</li>
+                            <li><i class="fa-solid fa-check"></i> Durable & Long-lasting</li>
+                        </ul>
+                    </div>
+
+                    <!-- Quantity & Actions -->
+                    <div class="product-actions-section">
+                        <div class="quantity-selector">
+                            <label>Quantity:</label>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn"><i class="fa-solid fa-minus"></i></button>
+                                <input type="number" class="quantity-input" id="detail-quantity" value="1" min="1">
+                                <button class="quantity-btn plus-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary btn-add-to-cart-detail">
+                                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                            </button>
+                            <button class="btn btn-accent btn-buy-now-detail">
+                                <i class="fa-solid fa-bolt"></i> Buy Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Meta -->
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <strong>SKU:</strong> <span id="product-sku">MED-001</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Category:</strong> <span>Medical Supplies</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs-section" data-aos="fade-up">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="description">Description</button>
+                    <button class="tab-btn" data-tab="specifications">Specifications</button>
+                    <button class="tab-btn" data-tab="reviews">Reviews</button>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-panel active" id="description">
+                        <h3>Product Description</h3>
+                        <p>This premium medical equipment is designed to meet the highest standards of quality and
+                            safety. Perfect for both professional healthcare settings and home use, it combines
+                            durability with ease of use.</p>
+                        <p>Our products undergo rigorous testing and quality control to ensure they meet FDA standards
+                            and provide reliable performance when you need it most.</p>
+                    </div>
+                    <div class="tab-panel" id="specifications">
+                        <h3>Technical Specifications</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td><strong>Material:</strong></td>
+                                <td>Medical-grade materials</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Certification:</strong></td>
+                                <td>FDA Approved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warranty:</strong></td>
+                                <td>1 Year</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Country of Origin:</strong></td>
+                                <td>USA</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-panel" id="reviews">
+                        <h3>Customer Reviews</h3>
+                        <div class="review-summary">
+                            <div class="average-rating">
+                                <span class="rating-number">4.5</span>
+                                <div class="stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                </div>
+                                <span class="total-reviews">Based on 120 reviews</span>
+                            </div>
+                        </div>
+
+                        <!-- Add Review Form -->
+                        <div class="add-review-section">
+                            <h4>Write a Review</h4>
+                            <form id="review-form" class="review-form">
+                                <div class="form-group">
+                                    <label for="review-name">Your Name *</label>
+                                    <input type="text" id="review-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review-email">Your Email *</label>
+                                    <input type="email" id="review-email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Your Rating *</label>
+                                    <div class="star-rating-input">
+                                        <i class="fa-regular fa-star" data-rating="1"></i>
+                                        <i class="fa-regular fa-star" data-rating="2"></i>
+                                        <i class="fa-regular fa-star" data-rating="3"></i>
+                                        <i class="fa-regular fa-star" data-rating="4"></i>
+                                        <i class="fa-regular fa-star" data-rating="5"></i>
+                                    </div>
+                                    <input type="hidden" id="review-rating" name="rating" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review-text">Your Review *</label>
+                                    <textarea id="review-text" name="review" rows="5" required
+                                        placeholder="Share your experience with this product..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                        </div>
+
+                        <div class="reviews-list">
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <strong>John D.</strong>
+                                    <div class="review-rating">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="review-text">Excellent quality! Exactly what I needed for my medical practice.
+                                </p>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <strong>Sarah M.</strong>
+                                    <div class="review-rating">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="review-text">Very good product. Fast shipping and great customer service.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products-section" data-aos="fade-up">
+                <h3>Related Products</h3>
+                <div class="product-grid" id="related-products-grid">
+                    <!-- Related products will be injected here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Cart Sidebar Placeholder -->
+    <div id="cart-sidebar-placeholder"></div>
+
+    <!-- Product Modal Placeholder -->
+    <div id="product-modal-placeholder"></div>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="../../assets/js/components.js"></script>
+    <script src="../../assets/js/script.js"></script>
+</body>
+
+</html>
