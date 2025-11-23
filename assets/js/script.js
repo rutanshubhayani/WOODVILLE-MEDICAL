@@ -431,8 +431,16 @@ function navigateToProductDetails(productId) {
         return;
     }
     
-    // Simple direct navigation
-    const url = `assets/pages/product-details.html?id=${productId}`;
+    // Fix path resolution based on current location
+    let url;
+    if (window.location.pathname.includes('/assets/pages/')) {
+        // Already in assets/pages directory (e.g., shop.html)
+        url = `product-details.html?id=${productId}`;
+    } else {
+        // In root directory (e.g., index.html)
+        url = `assets/pages/product-details.html?id=${productId}`;
+    }
+    
     console.log('Navigating to:', url);
     window.location.href = url;
 }
