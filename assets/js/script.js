@@ -501,10 +501,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             e.stopPropagation();
             const card = btnView.closest('.product-card');
-            const productId = card ? card.dataset.id : null;
-            console.log('Eye icon clicked, product ID:', productId);
-            if (productId) {
-                navigateToProductDetails(productId);
+            console.log('Eye icon clicked, opening product modal');
+            if (card) {
+                openProductModal(card);
             }
             return;
         }
@@ -669,6 +668,10 @@ function openProductModal(card) {
     const imageSrc = card.querySelector('img').src;
     const ratingHtml = card.querySelector('.rating').innerHTML;
 
+    // Get product details from catalog
+    const productData = productCatalog.find(p => p.id === id);
+    const description = productData ? productData.description : 'High-quality medical equipment for professional use.';
+
     // Store current product data
     currentModalProduct = {
         id,
@@ -683,6 +686,11 @@ function openProductModal(card) {
     modalPrice.textContent = `$${price.toFixed(2)}`;
     modalRating.innerHTML = ratingHtml;
     modalQuantityInput.value = 1;
+    
+    // Set description if modal has description element
+    if (modalDescription) {
+        modalDescription.textContent = description;
+    }
 
     // Show Modal
     productModal.classList.add('active');
