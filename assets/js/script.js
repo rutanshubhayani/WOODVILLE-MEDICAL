@@ -230,6 +230,134 @@ const productCatalog = [
             'assets/images/product 2.jpg'
         ],
         description: 'Comprehensive first aid kit with organized compartments for trauma pads, bandages, and essential tools.'
+    },
+    {
+        id: '13',
+        name: 'Adjustable Knee Support Brace',
+        price: 65.00,
+        category: 'orthopedic',
+        rating: 4.9,
+        reviews: 72,
+        sku: 'ORTHO-013',
+        image: 'assets/images/knee cap/knee cap1.jpeg',
+        images: [
+            'assets/images/knee cap/knee cap1.jpeg',
+            'assets/images/knee cap/knee cap2.jpeg',
+            'assets/images/knee cap/knee cap3.jpeg'
+        ],
+        description: 'Reinforced hinged knee brace that stabilizes ligaments during rehab and keeps patients mobile after injuries.'
+    },
+    {
+        id: '14',
+        name: 'Lumbar Support Belt',
+        price: 58.00,
+        category: 'orthopedic',
+        rating: 4.7,
+        reviews: 61,
+        sku: 'ORTHO-014',
+        image: 'assets/images/support belt/Support Belt1.jpeg',
+        images: [
+            'assets/images/support belt/Support Belt1.jpeg',
+            'assets/images/support belt/Support Belt2.jpeg',
+            'assets/images/support belt/Support Belt3.jpeg'
+        ],
+        description: 'Medical-grade lumbar belt with dual tension straps that provide adjustable compression for lower back pain relief.'
+    },
+    {
+        id: '15',
+        name: 'Comprehensive General Medical Kit',
+        price: 48.00,
+        category: 'general',
+        rating: 4.8,
+        reviews: 134,
+        sku: 'GEN-015',
+        image: 'assets/images/Medical Kit/Medical Kit1.jpeg',
+        images: [
+            'assets/images/Medical Kit/Medical Kit1.jpeg',
+            'assets/images/Medical Kit/Medical Kit2.jpeg',
+            'assets/images/Medical Kit/Medical Kit3.jpeg'
+        ],
+        description: 'General practice medical kit with wound care dressings, airway tools, and diagnostics for outpatient visits.'
+    },
+    {
+        id: '16',
+        name: 'Stethoscope & BP Monitor Combo',
+        price: 70.00,
+        category: 'general',
+        rating: 4.6,
+        reviews: 89,
+        sku: 'GEN-016',
+        image: 'assets/images/Stethoscope & BP Monitor Combo/Stethoscope & BP Monitor Combo1.jpeg',
+        images: [
+            'assets/images/Stethoscope & BP Monitor Combo/Stethoscope & BP Monitor Combo1.jpeg',
+            'assets/images/Stethoscope & BP Monitor Combo/Stethoscope & BP Monitor Combo2.jpeg',
+            'assets/images/Stethoscope & BP Monitor Combo/Stethoscope & BP Monitor Combo3.jpeg'
+        ],
+        description: 'Dual-head stethoscope paired with a manual aneroid blood pressure cuff and carrying case for general practitioners.'
+    },
+    {
+        id: '17',
+        name: 'Orthopedic Recovery Pack',
+        price: 85.00,
+        category: 'orthopedic',
+        rating: 4.8,
+        reviews: 55,
+        sku: 'ORTHO-017',
+        image: 'assets/images/ortho pack.jpeg',
+        images: [
+            'assets/images/ortho pack.jpeg',
+         
+        ],
+        description: 'Complete orthopedic kit with braces, cooling wraps, and compression bands designed for comprehensive post-injury recovery.'
+    },
+    {
+        id: '18',
+        name: 'Ankle Stabilizer Sleeve',
+        price: 32.00,
+        category: 'orthopedic',
+        rating: 4.5,
+        reviews: 67,
+        sku: 'ORTHO-018',
+        image: 'assets/images/Ankle Stabilizer Sleeve/Ankle Stabilizer Sleeve1.jpeg',
+        images: [
+            'assets/images/Ankle Stabilizer Sleeve/Ankle Stabilizer Sleeve1.jpeg',
+            'assets/images/Ankle Stabilizer Sleeve/Ankle Stabilizer Sleeve2.jpeg',
+            'assets/images/Ankle Stabilizer Sleeve/Ankle Stabilizer Sleeve3.jpeg'
+        ],
+        description: 'Elastic ankle sleeve with targeted compression zones to prevent rolling injuries during rehabilitation.'
+    },
+    {
+        id: '19',
+        name: 'Shoulder Immobilizer Sling',
+        price: 54.00,
+        category: 'orthopedic',
+        rating: 4.4,
+        reviews: 48,
+        sku: 'ORTHO-019',
+        image: 'assets/images/Shoulder Immobilizer Sling/Shoulder Immobilizer Sling1.jpeg',
+        images: [
+            'assets/images/Shoulder Immobilizer Sling/Shoulder Immobilizer Sling1.jpeg',
+            'assets/images/Shoulder Immobilizer Sling/Shoulder Immobilizer Sling2.jpeg',
+            'assets/images/Shoulder Immobilizer Sling/Shoulder Immobilizer Sling3.jpeg'
+        ],
+        description: 'Breathable shoulder sling with adjustable straps to stabilize rotator cuff and clavicle injuries.'
+    },
+
+    {
+        id: '21',
+        name: 'Elite Wrist Support Pair',
+        price: 27.00,
+        category: 'orthopedic',
+        rating: 4.3,
+        reviews: 52,
+        sku: 'ORTHO-021',
+        image: 'assets/images/Elite Wrist Support Pair/Elite Wrist Support Pair1.jpeg',
+        images: [
+            'assets/images/Elite Wrist Support Pair/Elite Wrist Support Pair1.jpeg',
+            'assets/images/Elite Wrist Support Pair/Elite Wrist Support Pair2.jpeg',
+            'assets/images/Elite Wrist Support Pair/Elite Wrist Support Pair3.jpeg'
+        ],
+        description: 'Low-profile wrist supports featuring aluminum stays that relieve strain during repetitive clinical tasks.'
     }
 ];
 
@@ -703,7 +831,7 @@ function openProductModal(card) {
     modalImage.src = currentModalProduct.image;
     modalImage.alt = product.name;
     modalName.textContent = product.name;
-    modalPrice.textContent = `$${product.price.toFixed(2)}`;
+    modalPrice.textContent = `£${product.price.toFixed(2)}`;
     modalRating.innerHTML = generateStarRating(product.rating) + `<span class="rating-count">(${product.reviews || 0} reviews)</span>`;
     modalDescription.textContent = product.description;
     modalQuantityInput.value = 1;
@@ -733,7 +861,7 @@ function renderCartSidebar() {
                 <button class="btn btn-primary" onclick="closeCartSidebar()">Start Shopping</button>
             </div>
         `;
-        if (cartTotalEl) cartTotalEl.textContent = '$0.00';
+        if (cartTotalEl) cartTotalEl.textContent = '£0.00';
         return;
     }
 
@@ -748,7 +876,7 @@ function renderCartSidebar() {
                 </div>
                 <div class="cart-item-details">
                     <h4>${item.name}</h4>
-                    <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                    <span class="cart-item-price">£${item.price.toFixed(2)}</span>
                     <div class="cart-item-actions">
                         <div class="quantity-controls">
                             <button class="quantity-btn minus-btn"><i class="fa-solid fa-minus"></i></button>
@@ -762,7 +890,7 @@ function renderCartSidebar() {
         `;
     }).join('');
 
-    if (cartTotalEl) cartTotalEl.textContent = `$${total.toFixed(2)}`;
+    if (cartTotalEl) cartTotalEl.textContent = `£${total.toFixed(2)}`;
 }
 
 function renderCartPage() {
@@ -778,8 +906,8 @@ function renderCartPage() {
                 <a href="${basePath}shop.html" class="btn btn-primary">Continue Shopping</a>
             </div>
         `;
-        if (cartPageSubtotalEl) cartPageSubtotalEl.textContent = '$0.00';
-        if (cartPageTotalEl) cartPageTotalEl.textContent = '$0.00';
+        if (cartPageSubtotalEl) cartPageSubtotalEl.textContent = '£0.00';
+        if (cartPageTotalEl) cartPageTotalEl.textContent = '£0.00';
         if (cartPageCountEl) cartPageCountEl.textContent = '0';
         return;
     }
@@ -797,7 +925,7 @@ function renderCartPage() {
                         <button class="remove-item">Remove</button>
                     </div>
                 </div>
-                <div class="cart-page-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-page-price">£${item.price.toFixed(2)}</div>
                 <div class="cart-page-quantity">
                     <div class="quantity-controls">
                         <button class="quantity-btn minus-btn"><i class="fa-solid fa-minus"></i></button>
@@ -805,13 +933,13 @@ function renderCartPage() {
                         <button class="quantity-btn plus-btn"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
-                <div class="cart-page-subtotal">$${itemTotal.toFixed(2)}</div>
+                <div class="cart-page-subtotal">£${itemTotal.toFixed(2)}</div>
             </div>
         `;
     }).join('');
 
-    if (cartPageSubtotalEl) cartPageSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-    if (cartPageTotalEl) cartPageTotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    if (cartPageSubtotalEl) cartPageSubtotalEl.textContent = `£${subtotal.toFixed(2)}`;
+    if (cartPageTotalEl) cartPageTotalEl.textContent = `£${subtotal.toFixed(2)}`;
     if (cartPageCountEl) {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartPageCountEl.textContent = totalItems;
@@ -823,8 +951,8 @@ function renderCheckoutSummary() {
 
     if (cart.length === 0) {
         checkoutOrderList.innerHTML = '<p>Your cart is empty.</p>';
-        if (checkoutSubtotal) checkoutSubtotal.textContent = '$0.00';
-        if (checkoutTotal) checkoutTotal.textContent = '$0.00';
+        if (checkoutSubtotal) checkoutSubtotal.textContent = '£0.00';
+        if (checkoutTotal) checkoutTotal.textContent = '£0.00';
         return;
     }
 
@@ -835,13 +963,13 @@ function renderCheckoutSummary() {
         return `
             <div class="order-product-item">
                 <span>${item.name} x ${item.quantity}</span>
-                <span>$${itemTotal.toFixed(2)}</span>
+                <span>£${itemTotal.toFixed(2)}</span>
             </div>
         `;
     }).join('');
 
-    if (checkoutSubtotal) checkoutSubtotal.textContent = `$${total.toFixed(2)}`;
-    if (checkoutTotal) checkoutTotal.textContent = `$${total.toFixed(2)}`;
+    if (checkoutSubtotal) checkoutSubtotal.textContent = `£${total.toFixed(2)}`;
+    if (checkoutTotal) checkoutTotal.textContent = `£${total.toFixed(2)}`;
 }
 
 function handleCheckoutSubmission() {
@@ -942,7 +1070,7 @@ function initializeProductDetails() {
     productImageEl.src = resolvedImage;
     productImageEl.alt = product.name;
     document.getElementById('product-detail-name').textContent = product.name;
-    document.getElementById('product-detail-price').textContent = `$${product.price.toFixed(2)}`;
+    document.getElementById('product-detail-price').textContent = `£${product.price.toFixed(2)}`;
     document.getElementById('product-detail-description').textContent = product.description;
     document.getElementById('product-sku').textContent = product.sku;
 
@@ -1130,7 +1258,7 @@ function loadRelatedProducts(currentProduct) {
                     ${generateStarRating(product.rating)}
                 </div>
                 <div class="price">
-                    <span class="new-price">$${product.price.toFixed(2)}</span>
+                    <span class="new-price">£${product.price.toFixed(2)}</span>
                 </div>
             </div>
         </div>
@@ -1286,7 +1414,7 @@ function initializeShopPage() {
     if (priceRange) {
         priceRange.addEventListener('input', (e) => {
             const maxPrice = parseInt(e.target.value);
-            maxPriceDisplay.textContent = `$${maxPrice}`;
+            maxPriceDisplay.textContent = `£${maxPrice}`;
             filterProducts({ maxPrice });
         });
     }
@@ -1321,7 +1449,7 @@ function initializeShopPage() {
             // Reset price
             if (priceRange) {
                 priceRange.value = 100;
-                maxPriceDisplay.textContent = '$100';
+                maxPriceDisplay.textContent = '£100';
             }
 
             // Reset ratings
@@ -1408,7 +1536,7 @@ function renderShopProducts(products) {
                     ${generateStarRating(product.rating)}
                 </div>
                 <div class="price">
-                    <span class="new-price">$${product.price.toFixed(2)}</span>
+                    <span class="new-price">£${product.price.toFixed(2)}</span>
                 </div>
             </div>
         </div>
