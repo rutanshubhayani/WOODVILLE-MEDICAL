@@ -669,16 +669,10 @@ function openProductModal(card) {
 
     // Extract Data
     const id = card.dataset.id;
-    const product = productCatalog.find(item => item.id === id);
-
-    if (!product) {
-        console.error('Product not found for modal');
-        return;
-    }
-
-    // Get product details from catalog
-    const productData = productCatalog.find(p => p.id === id);
-    const description = productData ? productData.description : 'High-quality medical equipment for professional use.';
+    const name = card.dataset.name;
+    const price = parseFloat(card.dataset.price);
+    const imageSrc = card.querySelector('img').src;
+    const ratingHtml = card.querySelector('.rating').innerHTML;
 
     // Store current product data
     currentModalProduct = {
