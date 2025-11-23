@@ -904,6 +904,7 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
+    margin-bottom: 40px;
 }
 
 .product-card {
