@@ -1691,6 +1691,274 @@ function initializeNewsletter() {
     }
 }
 
+// Helper functions for order processing
+function getCartItems() {
+    return cart.map(item => ({
+        ...item,
+        sku: productCatalog.find(p => p.id === item.id)?.sku || 'N/A'
+    }));
+}
+
+function calculateCartTotal() {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+function clearCart() {
+    cart = [];
+    saveCart();
+    updateCartUI();
+    renderCartSidebar();
+    renderCheckoutSummary();
+    renderCartPage();
+}
+
+// Order Confirmation Page Functions
+function initializeOrderConfirmation() {
+    // Generate order details
+    generateOrderNumber();
+    setOrderDate();
+    loadOrderData();
+    calculateDeliveryDate();
+    
+    // Initialize AOS animations
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            offset: 100
+        });
+    }
+}
+
+function generateOrderNumber() {
+    // Generate a random order number
+    const orderNumber = 'WM' + Date.now().toString().slice(-8);
+    const orderNumberEl = document.getElementById('order-number');
+    if (orderNumberEl) {
+        orderNumberEl.textContent = orderNumber;
+    }
+}
+
+function setOrderDate() {
+    const today = new Date();
+    const orderDateEl = document.getElementById('order-date');
+    if (orderDateEl) {
+        orderDateEl.textContent = today.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+}
+
+function calculateDeliveryDate() {
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + 3); // 3 days delivery
+    
+    const deliveryDateEl = document.getElementById('delivery-date');
+    if (deliveryDateEl) {
+        deliveryDateEl.textContent = deliveryDate.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+}
+
+function loadOrderData() {
+    // Get order data from localStorage or URL parameters
+    const orderData = getOrderData();
+    
+    if (orderData) {
+        // Populate order information
+        populateOrderInfo(orderData);
+        
+        // Populate shipping address
+        populateShippingAddress(orderData);
+        
+        // Populate order items
+        populateOrderItems(orderData.items);
+        
+        // Populate summary
+        populateSummary(orderData);
+    } else {
+        // Fallback with sample data
+        loadSampleOrderData();
+    }
+}
+
+function getOrderData() {
+    // Try to get from localStorage first
+    let orderData = localStorage.getItem('orderConfirmationData');
+    if (orderData) {
+        return JSON.parse(orderData);
+    }
+    
+    // Try to get from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('order');
+    
+    if (orderId) {
+        // In a real application, you would fetch this from a server
+        return localStorage.getItem(`order_${orderId}`) ? JSON.parse(localStorage.getItem(`order_${orderId}`)) : null;
+    }
+    
+    return null;
+}
+
+function populateOrderInfo(orderData) {
+    const paymentMethodEl = document.getElementById('payment-method');
+    const totalAmountEl = document.getElementById('total-amount');
+    
+    if (paymentMethodEl) {
+        paymentMethodEl.textContent = orderData.paymentMethod === 'bank_transfer' ? 'Direct Bank Transfer' : 'Cash on Delivery';
+    }
+    
+    if (totalAmountEl) {
+        totalAmountEl.textContent = `£${orderData.total.toFixed(2)}`;
+    }
+}
+
+function populateShippingAddress(orderData) {
+    const shippingAddressEl = document.getElementById('shipping-address');
+    
+    if (shippingAddressEl && orderData.shipping) {
+        const address = orderData.shipping;
+        shippingAddressEl.innerHTML = `
+            <strong>${address.firstName} ${address.lastName}</strong><br>
+            ${address.address}<br>
+            ${address.city}, ${address.postcode}<br>
+            ${address.country}
+        `;
+    }
+}
+
+function populateOrderItems(items) {
+    const orderItemsEl = document.getElementById('order-items');
+    
+    if (orderItemsEl && items && items.length > 0) {
+        orderItemsEl.innerHTML = items.map(item => `
+            <div class="order-item">
+                <div class="order-item-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="order-item-details">
+                    <div class="order-item-name">${item.name}</div>
+                    <div class="order-item-sku">SKU: ${item.sku || 'N/A'}</div>
+                </div>
+                <div class="order-item-quantity">Qty: ${item.quantity}</div>
+                <div class="order-item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+        `).join('');
+    }
+}
+
+function populateSummary(orderData) {
+    const summarySubtotalEl = document.getElementById('summary-subtotal');
+    const summaryTotalEl = document.getElementById('summary-total');
+    
+    if (summarySubtotalEl) {
+        summarySubtotalEl.textContent = `£${orderData.subtotal.toFixed(2)}`;
+    }
+    
+    if (summaryTotalEl) {
+        summaryTotalEl.textContent = `£${orderData.total.toFixed(2)}`;
+    }
+}
+
+function loadSampleOrderData() {
+    // Sample data for demonstration
+    const sampleData = {
+        paymentMethod: 'bank_transfer',
+        total: 67.00,
+        subtotal: 67.00,
+        shipping: {
+            firstName: 'John',
+            lastName: 'Doe',
+            address: '123 Healthcare Street',
+            city: 'London',
+            postcode: 'SW1A 1AA',
+            country: 'United Kingdom'
+        },
+        items: [
+            {
+                id: '1',
+                name: 'N95 Face Mask',
+                price: 18.00,
+                quantity: 2,
+                image: '../images/product_mask.png',
+                sku: 'MED-001'
+            },
+            {
+                id: '2',
+                name: 'Hand Sanitizer (500ml)',
+                price: 12.00,
+                quantity: 1,
+                image: '../images/product_sanitizer.png',
+                sku: 'MED-002'
+            },
+            {
+                id: '5',
+                name: 'Digital Thermometer',
+                price: 25.00,
+                quantity: 1,
+                image: '../images/product 1.jpg',
+                sku: 'MED-005'
+            }
+        ]
+    };
+    
+    populateOrderInfo(sampleData);
+    populateShippingAddress(sampleData);
+    populateOrderItems(sampleData.items);
+    populateSummary(sampleData);
+}
+
+// Function to handle "Place Order" button click from checkout page
+function handlePlaceOrder(event) {
+    event.preventDefault();
+    
+    // Get form data
+    const form = document.getElementById('checkout-form');
+    if (!form) return;
+    
+    const formData = new FormData(form);
+    
+    // Validate form
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // Get cart items
+    const cartItems = getCartItems();
+    const cartTotal = calculateCartTotal();
+    
+    // Prepare order data
+    const orderData = {
+        paymentMethod: formData.get('payment_method'),
+        total: cartTotal,
+        subtotal: cartTotal,
+        shipping: {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            address: formData.get('address'),
+            city: formData.get('city'),
+            postcode: formData.get('postcode'),
+            country: formData.get('country') || 'United Kingdom'
+        },
+        items: cartItems
+    };
+    
+    // Store order data
+    localStorage.setItem('orderConfirmationData', JSON.stringify(orderData));
+    
+    // Clear cart
+    clearCart();
+    
+    // Redirect to confirmation page
+    window.location.href = 'order-confirmation.html';
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     // Existing initialization code...
@@ -1698,4 +1966,292 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add new initializations
     animateCounter();
     initializeNewsletter();
+    initializeCheckout();
+    
+    // Initialize place order button for checkout page
+    const placeOrderBtn = document.querySelector('.btn-place-order');
+    if (placeOrderBtn) {
+        placeOrderBtn.addEventListener('click', handlePlaceOrder);
+    }
 });
+
+// Multi-Step Checkout Functions
+function initializeCheckout() {
+    const checkoutForm = document.getElementById('checkout-form');
+    if (!checkoutForm) return;
+    
+    let currentStep = 1;
+    const totalSteps = 4;
+    
+    // Initialize checkout order items
+    renderCheckoutOrderItems();
+    
+    // Navigation buttons
+    const continueBtn = document.querySelector('.btn-continue');
+    const backBtn = document.querySelector('.btn-back');
+    const completeBtn = document.querySelector('.btn-complete-payment');
+    
+    // Step navigation
+    function showStep(stepNumber) {
+        // Hide all steps
+        document.querySelectorAll('.checkout-step').forEach(step => {
+            step.style.display = 'none';
+        });
+        
+        // Show current step
+        const currentStepEl = document.querySelector(`.checkout-step[data-step="${stepNumber}"]`);
+        if (currentStepEl) {
+            currentStepEl.style.display = 'block';
+        }
+        
+        // Update progress indicators
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            const stepNum = index + 1;
+            step.classList.remove('active', 'completed');
+            
+            if (stepNum < stepNumber) {
+                step.classList.add('completed');
+            } else if (stepNum === stepNumber) {
+                step.classList.add('active');
+            }
+        });
+        
+        // Update progress lines
+        document.querySelectorAll('.progress-line').forEach((line, index) => {
+            const lineNum = index + 1;
+            if (lineNum < stepNumber) {
+                line.classList.add('completed');
+            } else {
+                line.classList.remove('completed');
+            }
+        });
+        
+        // Update button visibility
+        backBtn.style.display = stepNumber === 1 ? 'none' : 'inline-flex';
+        continueBtn.style.display = stepNumber === totalSteps ? 'none' : 'inline-flex';
+        completeBtn.style.display = stepNumber === totalSteps ? 'inline-flex' : 'none';
+    }
+    
+    // Validate current step
+    function validateStep(stepNumber) {
+        const currentStepEl = document.querySelector(`[data-step="${stepNumber}"]`);
+        if (!currentStepEl) return false;
+        
+        const requiredFields = currentStepEl.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#ef4444';
+                field.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+            } else {
+                field.style.borderColor = '#e5e7eb';
+                field.style.boxShadow = 'none';
+            }
+        });
+        
+        return isValid;
+    }
+    
+    // Continue button click
+    continueBtn.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+                
+                // Handle billing address logic
+                if (currentStep === 3) {
+                    handleBillingAddressToggle();
+                }
+            }
+        } else {
+            showToast('Please fill in all required fields', 'error');
+        }
+    });
+    
+    // Back button click
+    backBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+    
+    // Complete payment button click
+    completeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (validateStep(currentStep)) {
+            handleCompletePayment();
+        } else {
+            showToast('Please fill in all required fields', 'error');
+        }
+    });
+    
+    // Initialize first step
+    showStep(currentStep);
+    
+    // Handle billing address checkbox
+    function handleBillingAddressToggle() {
+        const sameAsDeliveryCheckbox = document.getElementById('sameAsDelivery');
+        const billingFields = document.getElementById('billing-fields');
+        
+        if (sameAsDeliveryCheckbox) {
+            sameAsDeliveryCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    billingFields.style.display = 'none';
+                    // Clear billing field requirements when hidden
+                    billingFields.querySelectorAll('input[required]').forEach(input => {
+                        input.removeAttribute('required');
+                    });
+                } else {
+                    billingFields.style.display = 'block';
+                    // Add back requirements when shown
+                    billingFields.querySelectorAll('input').forEach(input => {
+                        if (input.id.includes('billing')) {
+                            input.setAttribute('required', '');
+                        }
+                    });
+                }
+            });
+        }
+    }
+    
+    // Card number formatting
+    const cardNumberInput = document.getElementById('cardNumber');
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            if (formattedValue.length > 19) formattedValue = formattedValue.substr(0, 19);
+            this.value = formattedValue;
+        });
+    }
+    
+    // CVV validation
+    const cvvInput = document.getElementById('cvv');
+    if (cvvInput) {
+        cvvInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+    }
+}
+
+function renderCheckoutOrderItems() {
+    const orderItemsContainer = document.getElementById('checkout-order-items');
+    if (!orderItemsContainer) return;
+    
+    if (cart.length === 0) {
+        orderItemsContainer.innerHTML = '<p style="text-align: center; color: #9ca3af;">No items in cart</p>';
+        return;
+    }
+    
+    let subtotal = 0;
+    orderItemsContainer.innerHTML = cart.map(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        
+        return `
+            <div class="order-item">
+                <div class="order-item-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="order-item-details">
+                    <div class="order-item-name">${item.name}</div>
+                    <div class="order-item-qty">Qty: ${item.quantity}</div>
+                </div>
+                <div class="order-item-price">£${itemTotal.toFixed(2)}</div>
+            </div>
+        `;
+    }).join('');
+    
+    // Update totals
+    const checkoutSubtotal = document.getElementById('checkout-subtotal');
+    const checkoutTotal = document.getElementById('checkout-total');
+    
+    if (checkoutSubtotal) checkoutSubtotal.textContent = `£${subtotal.toFixed(2)}`;
+    if (checkoutTotal) checkoutTotal.textContent = `£${subtotal.toFixed(2)}`;
+}
+
+function handleCompletePayment() {
+    // Collect all form data
+    const formData = new FormData(document.getElementById('checkout-form'));
+    
+    // Get cart items and totals
+    const cartItems = getCartItems();
+    const cartTotal = calculateCartTotal();
+    
+    // Prepare order data
+    const orderData = {
+        customer: {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            email: formData.get('email'),
+            phone: formData.get('phone')
+        },
+        delivery: {
+            address: formData.get('address'),
+            city: formData.get('city'),
+            postcode: formData.get('postcode'),
+            country: formData.get('country') || 'UK'
+        },
+        billing: {
+            sameAsDelivery: formData.get('sameAsDelivery') === 'on',
+            address: formData.get('billingAddress') || formData.get('address'),
+            city: formData.get('billingCity') || formData.get('city'),
+            postcode: formData.get('billingPostcode') || formData.get('postcode'),
+            country: formData.get('billingCountry') || formData.get('country') || 'UK'
+        },
+        payment: {
+            cardNumber: formData.get('cardNumber'),
+            cardName: formData.get('cardName'),
+            expiryMonth: formData.get('expiryMonth'),
+            expiryYear: formData.get('expiryYear'),
+            cvv: formData.get('cvv')
+        },
+        items: cartItems,
+        subtotal: cartTotal,
+        total: cartTotal,
+        paymentMethod: 'credit_card'
+    };
+    
+    // Prepare data for confirmation page
+    const confirmationData = {
+        paymentMethod: 'Credit Card',
+        total: cartTotal,
+        subtotal: cartTotal,
+        shipping: {
+            firstName: orderData.customer.firstName,
+            lastName: orderData.customer.lastName,
+            address: orderData.delivery.address,
+            city: orderData.delivery.city,
+            postcode: orderData.delivery.postcode,
+            country: orderData.delivery.country
+        },
+        items: cartItems
+    };
+    
+    // Store order data for confirmation page
+    localStorage.setItem('orderConfirmationData', JSON.stringify(confirmationData));
+    
+    // Show loading state
+    const completeBtn = document.querySelector('.btn-complete-payment');
+    const originalText = completeBtn.innerHTML;
+    completeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    completeBtn.disabled = true;
+    
+    // Simulate payment processing
+    setTimeout(() => {
+        // Clear cart
+        clearCart();
+        
+        // Show success message
+        showToast('Payment successful! Redirecting to confirmation...', 'success');
+        
+        // Redirect to confirmation page
+        setTimeout(() => {
+            window.location.href = 'order-confirmation.html';
+        }, 1500);
+    }, 2000);
+}

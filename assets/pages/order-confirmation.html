@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - WOODVILLE MEDICAL LIMITED</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Order Confirmation Section -->
+    <section class="order-confirmation-section">
+        <div class="container">
+            <div class="order-confirmation-content">
+                
+                <!-- Success Message -->
+                <div class="order-success-header" data-aos="fade-up">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h1>Order Confirmed!</h1>
+                    <p class="success-message">Thank you for your order. We've received your order and will process it shortly.</p>
+                </div>
+
+                <!-- Order Details -->
+                <div class="order-details-grid">
+                    <!-- Order Information -->
+                    <div class="order-info-card" data-aos="fade-right">
+                        <h3><i class="fas fa-clipboard-list"></i> Order Information</h3>
+                        <div class="info-row">
+                            <span class="info-label">Order Number:</span>
+                            <span class="info-value" id="order-number">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Order Date:</span>
+                            <span class="info-value" id="order-date">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Payment Method:</span>
+                            <span class="info-value" id="payment-method">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Total Amount:</span>
+                            <span class="info-value total-amount" id="total-amount">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="shipping-info-card" data-aos="fade-left">
+                        <h3><i class="fas fa-truck"></i> Shipping Information</h3>
+                        <div class="shipping-address" id="shipping-address">
+                            <!-- Address will be populated by JavaScript -->
+                        </div>
+                        <div class="delivery-estimate">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Estimated delivery: <strong id="delivery-date">-</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="order-items-section" data-aos="fade-up">
+                    <h3><i class="fas fa-box"></i> Order Items</h3>
+                    <div class="order-items-list" id="order-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-section" data-aos="fade-up">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">£0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="summary-shipping">Free</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="summary-total">£0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="confirmation-actions" data-aos="fade-up">
+                    <a href="../../index.html" class="btn btn-outline">Continue Shopping</a>
+                    <button onclick="window.print()" class="btn btn-primary">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </button>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="additional-info" data-aos="fade-up">
+                    <div class="info-card">
+                        <h4><i class="fas fa-envelope"></i> Email Confirmation</h4>
+                        <p>A confirmation email with your order details has been sent to your email address.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-headset"></i> Need Help?</h4>
+                        <p>Contact our customer support at <a href="mailto:support@woodvillemedical.com">support@woodvillemedical.com</a> or call us at <a href="tel:+441234567890">+44 123 456 7890</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="../js/components.js"></script>
+    <script src="../js/script.js"></script>
+    
+    <script>
+        // Initialize order confirmation page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeOrderConfirmation();
+        });
+    </script>
+
+</body>
+
+</html>
