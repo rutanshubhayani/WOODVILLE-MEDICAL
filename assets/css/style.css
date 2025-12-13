@@ -137,9 +137,17 @@ ul {
     align-items: center;
 }
 
+.top-bar-left,
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 .top-bar-left a,
 .top-bar-right a {
-    margin-right: 20px;
+    margin-right: 0;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -307,15 +315,24 @@ ul {
     }
 
     .header-wrapper {
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo cart"
+            "search search";
+        align-items: center;
         gap: 15px;
         padding: 15px;
     }
 
+    .header-wrapper .logo {
+        grid-area: logo;
+        justify-self: start;
+    }
+
     .logo h1 {
         font-size: 24px;
-        text-align: center;
+        text-align: left;
     }
 
     .mobile-menu-toggle {
@@ -326,10 +343,10 @@ ul {
     }
 
     .search-bar {
+        grid-area: search;
         margin: 0;
         max-width: none;
         width: 100%;
-        order: 2;
     }
 
     .search-bar form {
@@ -349,6 +366,11 @@ ul {
         width: 100%;
         text-align: center;
         padding: 15px;
+    }
+
+    .cart-action {
+        grid-area: cart;
+        justify-self: end;
     }
 
     .header-actions {
@@ -762,6 +784,27 @@ ul {
 .footer-col p {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 20px;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-contact a:hover {
+    color: var(--primary-color);
+}
+
+.footer-contact i {
+    color: var(--primary-color);
 }
 
 .footer-col ul li {
@@ -1632,7 +1675,9 @@ ul {
     margin: 25px 0;
 }
 
-.info-card {
+.contact-info-card {
+    display: flex;
+    align-items: flex-start;
     gap: 12px;
     padding: 18px;
     border-radius: 18px;
@@ -1640,19 +1685,32 @@ ul {
     background: #f9fbfc;
 }
 
-.info-card i {
+.contact-info-card i {
     font-size: 20px;
     color: var(--primary-color);
 }
 
-.info-card strong {
+.contact-info-card strong {
     display: block;
     color: var(--secondary-color);
 }
 
-.info-card span {
+.contact-info-card span {
+    display: block;
     color: var(--text-light);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+}
+
+.contact-info-card a {
+    display: inline-block;
+    margin: 4px 0;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-info-card a:hover {
+    color: var(--primary-color);
 }
 
 .availability-card {
@@ -4002,10 +4060,11 @@ input[type=number] {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    justify-items: center;
 }
 
 .stat-item {
-    text-align: left;
+    text-align: center;
 }
 
 .stat-number {
@@ -4881,5 +4940,265 @@ input[type=number] {
         width: 100%;
         max-width: 300px;
         justify-content: center;
+    }
+}
+
+/* Services Highlight Section */
+.services-highlight {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    margin: 40px 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-feature{
+    margin: 20px;
+}
+
+.services-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.services-highlight .container {
+    position: relative;
+    z-index: 2;
+}
+
+.services-highlight h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffffff, #e3f2fd);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.services-highlight p {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 3rem;
+}
+
+.service-feature {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.service-feature:hover::before {
+    left: 100%;
+}
+
+.service-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.service-feature i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.service-feature h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #ffffff;
+}
+
+.service-feature p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact-cta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-cta .btn {
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-cta .btn-primary {
+    background: #ffffff;
+    color: var(--primary-color);
+    border: 2px solid #ffffff;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.contact-cta .btn-primary:hover {
+    background: transparent;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 255, 255, 0.4);
+}
+
+.contact-cta .btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.contact-cta .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.contact-cta .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.contact-cta .btn:hover::before {
+    left: 100%;
+}
+
+.contact-cta .btn i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.contact-cta .btn:hover i {
+    transform: translateX(3px);
+}
+
+/* Responsive Design for Services Section */
+@media (max-width: 768px) {
+    .services-highlight {
+        padding: 40px 20px;
+        margin: 30px 0;
+    }
+    
+    
+    .services-highlight h3 {
+        font-size: 2rem;
+    }
+    
+    .services-highlight p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .service-features {
+        grid-template-columns: 1fr;
+        margin-bottom: 2rem;
+    }
+    
+    .service-feature {
+        padding: 25px 15px;
+    }
+    
+    .service-feature i {
+        font-size: 2.5rem;
+    }
+    
+    .service-feature h4 {
+        font-size: 1.2rem;
+    }
+    
+    .contact-cta {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-cta .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-highlight {
+        padding: 30px 15px;
+        border-radius: 15px;
+    }
+    
+    .services-highlight h3 {
+        font-size: 1.8rem;
+    }
+    
+    .service-feature {
+        padding: 20px 15px;
+    }
+    
+    .service-feature i {
+        font-size: 2.2rem;
+    }
+    
+    .contact-cta .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
     }
 }
